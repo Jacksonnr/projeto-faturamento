@@ -2,23 +2,23 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 public class ContaLuz extends Produto {
 
     Scanner leitor = new Scanner(System.in);
 
     private Double consumoMensal;
     private Double juros;
-    private String valor;
+    private Double valor;
     private LocalDate mesReferencia;
     private LocalDate vencimento;
     private LocalDate dataPagamento;
- 
+
     public ContaLuz(String nomeResponsavel, LocalDate mesReferencia, LocalDate vencimento) {
         super(nomeResponsavel);
         this.mesReferencia = mesReferencia;
         this.vencimento = vencimento;
     }
-
 
     public Double getConsumoMensal() {
         return consumoMensal;
@@ -36,11 +36,11 @@ public class ContaLuz extends Produto {
         this.juros = juros;
     }
 
-    public String getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(String valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 
@@ -68,40 +68,48 @@ public class ContaLuz extends Produto {
         this.dataPagamento = dataPagamento;
     }
 
-   public double calcularConsumoMensal (){ //* Função para calculo geral do valor do Kw/h */
-        double valorKwh = 0.50; //* valor do kwh */
+    public double calcularConsumoMensal(double valor) { // * Função para calculo geral do valor do Kw/h */
+        double valorKwh = 0.50; // * valor do kwh */
         double consumoKwh = 0;
         try {
-            consumoKwh = leitor.nextInt(); //* solicitar do usuário o número de kwh consumidos informados no contador */
+            consumoKwh = leitor.nextInt(); // * solicitar do usuário o número de kwh consumidos informados no contador
+                                           // */
         } catch (InputMismatchException e) {
             // TODO: handle exception
         }
-        double valorFinal = (valorKwh * consumoKwh);
-        return valorFinal;
-   }
+        valor = (valorKwh * consumoKwh);
+        return valor;
+    }
 
-    public String calcularJuros (double valorFinal) {
+    public String calcularJuros(double valor) {
         double juros = 0.15;
-        System.out.print("Infome a data da conta (Ex: dd-mm-aaaa): ");
-        String dataConta = leitor.next();
-        System.out.print("Digite a data do vencimento da conta (Ex: dd-mm-aaaa): " );
-        String dataVencimento = leitor.next();
+        int contadorDias = 30;
+        System.out.print("Informe o dia que a conta foi gerada: ");
+        int diaConta = leitor.nextInt();
+        System.out.print("Informe o mês que a conta foi gerada: ");
+        int mesConta = leitor.nextInt();
+        System.out.print("Informe o ano que a conta foi gerada: ");
+        int anoConta = leitor.nextInt();
 
-        LocalDate dataContaParse = LocalDate.parse(dataConta);
-        LocalDate dataVencimentoParse = LocalDate.parse(dataVencimento);
+        LocalDate dataConta = LocalDate.of(anoConta, mesConta, diaConta);
 
-        long dataFinal = ChronoUnit.DAYS.between(dataContaParse, dataVencimentoParse);
+        System.out.print("Informe o dia de vencimento: ");
+        int diaVencimento = leitor.nextInt();
+        System.out.print("Informe o mês de vencimento: ");
+        int mesVencimento = leitor.nextInt();
+        System.out.print("Informe o ano de vencimento: ");
+        int anoVencimento = leitor.nextInt();
+        LocalDate dataVencimento = LocalDate.of(anoVencimento, mesVencimento, diaVencimento);
 
-        if (dataFinal > 30){
-            return "Valor de juros: " + dataFinal * juros;
+        long dataFinal = ChronoUnit.DAYS.between(dataConta, dataVencimento);
+
+        if (dataFinal > contadorDias) {
+            long contadorJuros = dataFinal - contadorDias;
+            valor = valor + (contadorJuros * juros);
+            return "O valor com juros ficou: R$" + valor;
+        } else {
+            return "Sem valor de juros a acrescentar.";
         }
-        else{
-            return "Sem valor de juros a pagar.";
-        } 
-        
-        
-        
-        
-   }
 
+    }
 }
