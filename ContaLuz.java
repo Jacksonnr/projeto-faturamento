@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 public class ContaLuz extends Produto {
@@ -68,10 +69,10 @@ public class ContaLuz extends Produto {
     }
 
    public double calcularConsumoMensal (){ //* Função para calculo geral do valor do Kw/h */
-        double valorKwh = 0.50;
+        double valorKwh = 0.50; //* valor do kwh */
         double consumoKwh = 0;
         try {
-            consumoKwh = leitor.nextInt();
+            consumoKwh = leitor.nextInt(); //* solicitar do usuário o número de kwh consumidos informados no contador */
         } catch (InputMismatchException e) {
             // TODO: handle exception
         }
@@ -79,12 +80,28 @@ public class ContaLuz extends Produto {
         return valorFinal;
    }
 
-//     public void calcularJuros (double valorFinal, LocalDate diaAtual) {
-//         double juros = 0.15;
-//         diaAtual.now();
-//         String diasPassados = leitor.next();
-//         LocalDate diasParse = LocalDate.parse(diasPassados).plus();
+    public String calcularJuros (double valorFinal) {
+        double juros = 0.15;
+        System.out.print("Infome a data da conta (Ex: dd-mm-aaaa): ");
+        String dataConta = leitor.next();
+        System.out.print("Digite a data do vencimento da conta (Ex: dd-mm-aaaa): " );
+        String dataVencimento = leitor.next();
+
+        LocalDate dataContaParse = LocalDate.parse(dataConta);
+        LocalDate dataVencimentoParse = LocalDate.parse(dataVencimento);
+
+        long dataFinal = ChronoUnit.DAYS.between(dataContaParse, dataVencimentoParse);
+
+        if (dataFinal > 30){
+            return "Valor de juros: " + dataFinal * juros;
+        }
+        else{
+            return "Sem valor de juros a pagar.";
+        } 
         
-//    }
+        
+        
+        
+   }
 
 }
