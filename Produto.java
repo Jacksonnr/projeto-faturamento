@@ -1,9 +1,18 @@
 public class Produto {
     private String nomeResponsavel;
+    private Double valor;
 
     
 
-    public Produto(String nomeResponsavel2) {
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public Produto(String nomeResponsavel, Double valor) {
     }
 
     public String getNomeResponsavel() {

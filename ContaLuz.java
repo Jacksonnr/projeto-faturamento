@@ -9,15 +9,13 @@ public class ContaLuz extends Produto {
 
     private Double consumoMensal;
     private Double juros;
-    private Double valor;
     private LocalDate mesReferencia;
     private LocalDate vencimento;
     private LocalDate dataPagamento;
 
-    public ContaLuz(String nomeResponsavel, LocalDate mesReferencia, LocalDate vencimento) {
-        super(nomeResponsavel);
-        this.mesReferencia = mesReferencia;
-        this.vencimento = vencimento;
+    public ContaLuz(String nomeResponsavel, Double valor) {
+        super(nomeResponsavel, valor);
+        
     }
 
     public Double getConsumoMensal() {
@@ -34,14 +32,6 @@ public class ContaLuz extends Produto {
 
     public void setJuros(Double juros) {
         this.juros = juros;
-    }
-
-    public Double getValor() {
-        return valor;
-    }
-
-    public void setValor(Double valor) {
-        this.valor = valor;
     }
 
     public LocalDate getMesReferencia() {
@@ -68,20 +58,13 @@ public class ContaLuz extends Produto {
         this.dataPagamento = dataPagamento;
     }
 
-    public double calcularConsumoMensal(double valor) { // * Função para calculo geral do valor do Kw/h */
+    public double calcularConsumoMensal(int consumoKwh) { // * Função para calculo geral do valor do Kw/h */
         double valorKwh = 0.50; // * valor do kwh */
-        double consumoKwh = 0;
-        try {
-            consumoKwh = leitor.nextInt(); // * solicitar do usuário o número de kwh consumidos informados no contador
-                                           // */
-        } catch (InputMismatchException e) {
-            // TODO: handle exception
-        }
-        valor = (valorKwh * consumoKwh);
+        Double valor = (valorKwh * consumoKwh);
         return valor;
     }
 
-    public String calcularJuros(double valor) {
+    public String calcularJuros(Double valor) {
         double juros = 0.15;
         int contadorDias = 30;
         System.out.print("Informe o dia que a conta foi gerada: ");
