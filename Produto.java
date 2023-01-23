@@ -12,7 +12,7 @@ public class Produto {
         this.valor = valor;
     }
 
-    public Produto(String nomeResponsavel, Double valor) {
+    public Produto(String nomeResponsavel) {
     }
 
     public String getNomeResponsavel() {

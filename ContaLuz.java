@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ContaLuz extends Produto {
@@ -13,8 +12,8 @@ public class ContaLuz extends Produto {
     private LocalDate vencimento;
     private LocalDate dataPagamento;
 
-    public ContaLuz(String nomeResponsavel, Double valor) {
-        super(nomeResponsavel, valor);
+    public ContaLuz(String nomeResponsavel) {
+        super(nomeResponsavel);
         
     }
 
@@ -67,22 +66,22 @@ public class ContaLuz extends Produto {
     public String calcularJuros(Double valor) {
         double juros = 0.15;
         int contadorDias = 30;
-        System.out.print("Informe o dia que a conta foi gerada: ");
-        int diaConta = leitor.nextInt();
-        System.out.print("Informe o mês que a conta foi gerada: ");
-        int mesConta = leitor.nextInt();
-        System.out.print("Informe o ano que a conta foi gerada: ");
-        int anoConta = leitor.nextInt();
-
-        LocalDate dataConta = LocalDate.of(anoConta, mesConta, diaConta);
-
         System.out.print("Informe o dia de vencimento: ");
         int diaVencimento = leitor.nextInt();
         System.out.print("Informe o mês de vencimento: ");
         int mesVencimento = leitor.nextInt();
         System.out.print("Informe o ano de vencimento: ");
         int anoVencimento = leitor.nextInt();
-        LocalDate dataVencimento = LocalDate.of(anoVencimento, mesVencimento, diaVencimento);
+
+        LocalDate dataConta = LocalDate.of(anoVencimento, mesVencimento, diaVencimento);
+
+        System.out.print("Informe o dia de pagamento: ");
+        int diaPagamento = leitor.nextInt();
+        System.out.print("Informe o mês de pagamento: ");
+        int mesPagamento = leitor.nextInt();
+        System.out.print("Informe o ano de pagamento: ");
+        int anoPagamento = leitor.nextInt();
+        LocalDate dataVencimento = LocalDate.of(anoPagamento, mesPagamento, diaPagamento);
 
         long dataFinal = ChronoUnit.DAYS.between(dataConta, dataVencimento);
 
