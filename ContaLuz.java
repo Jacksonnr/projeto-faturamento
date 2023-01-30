@@ -34,10 +34,13 @@ public class ContaLuz extends Produto {
         return valor;
     }
 
-    public void calculoBandeira(String bandeira, double valor) {
+    public String calculoBandeira(String bandeira, double valor) {
         double bandAmarela = 0.01874;
         double bandVermelha1 = 0.03971;
         double bandVermelha2 = 0.09492;
+        
+
+
         if (bandeira == "Verde" || bandeira == "verde") {
             System.out.println(
                     "Bandeira verde: condições favoráveis de geração de energia. A tarifa não sofre nenhum acréscimo");
@@ -63,7 +66,8 @@ public class ContaLuz extends Produto {
                     System.out.println("Favor selecionar uma opção válida!");
                     break;
             }
-        }
+            
+        }return "O valor após verificação das bandeiras ficou: " + valor;
     }
 
     // public String calcularJuros(Double valor) {

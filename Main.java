@@ -8,9 +8,12 @@ public class Main {
         ContaLuz contaluz = new ContaLuz(nome);
         System.out.println("Infome o consumo de kwh neste mês que houve na residência do " + nome);
         int consumo = leitor.nextInt();
-        
-        
-        
+        double valor = contaluz.calcularConsumoMensal(consumo);
+
+        System.out.println("informe agora a bandeira vigente no mes");
+        String bandeira = leitor.next();
+
+        contaluz.calculoBandeira(bandeira, valor);
+
     }
 }
-
